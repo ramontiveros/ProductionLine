@@ -1,24 +1,17 @@
-<h1>Estado de line</h1>
-<svg width="15cm" height="7cm" viewBox="129 119 295 130" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <g>
-    <rect style="fill: #ffffff" x="130.05" y="120" width="137.9" height="38"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="130.05" y="120" width="137.9" height="38"/>
-    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="199" y="142.9">
-      <tspan x="199" y="142.9">Ensambladora 1</tspan>
+<h1>Estado de la linea</h1>
+<svg width="20cm" height="10cm" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g ng-repeat="en in main.ensambladoras">
+    <rect ng-attr-style="{{en.color()}}" ng-attr-width="{{en.w}}" ng-attr-height="{{en.h}}" ng-attr-x="{{en.x}}"  ng-attr-y="{{en.y}}"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" ng-attr-x="{{en.x}}"  ng-attr-y="{{en.y}}" ng-attr-width="{{en.w}}" ng-attr-height="{{en.h}}"/>
+    <line ng-attr-x1="{{en.xl1()}}"  ng-attr-y1="{{en.yl1()}}" ng-attr-x2="{{en.xl2()}}" ng-attr-y2="{{en.yl2()}}" style="stroke:rgb(0,0,0);stroke-width:2" />
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"  ng-attr-x="{{en.xt()}}" ng-attr-y="{{en.yt()}}">
+      <tspan ng-attr-x="{{en.xt()}}" ng-attr-y="{{en.yt()}}">{{en.name}}</tspan>
     </text>
-  </g>
-  <g>
-    <rect style="fill: #ffffff" x="133.05" y="209" width="137.9" height="38"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="133.05" y="209" width="137.9" height="38"/>
-    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="202" y="231.9">
-      <tspan x="202" y="231.9">Ensambladora 2</tspan>
+    <text font-size="10" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal"  ng-attr-x="{{en.xo()}}" ng-attr-y="{{en.yo()}}">
+      <tspan ng-attr-x="{{en.xo()}}" ng-attr-y="{{en.yo()}}">Operador: {{en.operator}}</tspan>
     </text>
-  </g>
-  <g>
-    <rect style="fill: #ffffff" x="333.575" y="159" width="88.85" height="38"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="333.575" y="159" width="88.85" height="38"/>
-    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="378" y="181.9">
-      <tspan x="378" y="181.9">Empaque</tspan>
+    <text font-size="10" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal"  ng-attr-x="{{en.xp()}}" ng-attr-y="{{en.yp()}}">
+      <tspan ng-attr-x="{{en.xp()}}" ng-attr-y="{{en.yp()}}">Piezas: {{en.pieces}}</tspan>
     </text>
   </g>
   <g>
