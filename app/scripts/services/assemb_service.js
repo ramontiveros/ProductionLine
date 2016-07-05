@@ -5,7 +5,8 @@ var config = {
     storageBucket: "project-9065448558614321644.appspot.com",
 };
 
-var Box = function(data, key){
+var Box = function(data, key, scope, ref){
+    var liveBind = ["name", "x", "y", "operator", "pieces"];
     this.key = key;
     this.name = data.name;
     this.x = data.x;
@@ -15,6 +16,15 @@ var Box = function(data, key){
     this.w = 138;
     this.h = 60;
     
+    if (ref){
+	var box = this;
+	angular.forEach(liveBind,function(attr){
+	   ref.child(attr).on("value", function(bindData) { 
+	       box[attr] = bindData.val();
+	       scope.$apply();
+	   }); 
+	});
+    }
     this.xt = function() {return this.x + 69;}
     this.yt = function() {return this.y + 15;}
     this.xl1 = function() {return this.x;}
@@ -27,7 +37,7 @@ var Box = function(data, key){
     this.yp = function(){ return this.yo() + 10;}
     this.color = function(){return this.pieces > 0 ? "fill: #00ff00" : "fill: #ff0000";}
     this.isEditable = function(){return this.key == undefined || this.editing};
-    this.getData = function(){ return {name: this.name, x: this.x, y: this.y}; }
+    this.getData = function(){ return {name: this.name, x: this.x, y: this.y, operator: this.operator, pieces: this.pieces}; }
 };
 
 angular.module('productionLineApp').
@@ -55,15 +65,9 @@ angular.module('productionLineApp').
 	this.fetch = function(){
 	    if (this.items) return $q.when(this.items);
 	    return fbAuth().then(function(auth) {
-		var deferred = $q.defer();
-		var ref = fbRef.database().ref('assembs');
-		ref.on('value', function(snapshot) {
-		    self.ens = [];
-		    angular.forEach(snapshot.val(),function(data, key){
-			self.ens.push(new Box(data, key))
-		    });		    
-		    deferred.resolve(self.ens);
-		});
+		deferred = $q.defer();
+		ref = fbRef.database().ref('assembs');
+		ref.once('value', function(snapshot) { deferred.resolve(snapshot); });
 		return deferred.promise;
 	    });
 	}

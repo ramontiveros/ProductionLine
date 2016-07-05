@@ -8,12 +8,12 @@
  * Controller of the productionLineApp
  */
 angular.module('productionLineApp')
-  .controller('MainCtrl', function () {
-      this.ensambladoras = [
-	  new Box({name: "Ensambladora 1", x: 130, y: 120, operator: "Jhon Doe", pieces: 10 }),
-	  new Box({name: "Ensambladora 2", x: 133, y: 209, operator: "Jhon Doe", pieces: 0 }),
-	  new Box({name: "Calidad", x: 333, y: 159, operator: "Jhon Doe", pieces: 3 })
-      ];
+  .controller('MainCtrl', function (snapshot, $scope) {
+      var self = this;
+      self.ensambladoras = [];
+      angular.forEach(snapshot.val(),function(data, key){
+	  self.ensambladoras.push(new Box(data, key, $scope, snapshot.ref.child(key)))
+      });
   });
 
 

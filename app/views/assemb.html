@@ -4,6 +4,8 @@
       <th>Nombre</th>
       <th>X</th>
       <th>Y</th>
+      <th>Operador</th>
+      <th>Piezas</th>
       <th><a ng-click="assembs.add()"><i class="glyphicon glyphicon-plus-sign"></i></a></th>
     </tr>
   </thead>
@@ -20,6 +22,14 @@
       <td>
 	<input type="number" ng-model="asemb.y" ng-show="asemb.isEditable()" />
 	{{asemb.isEditable() ? '' : asemb.y}}
+      </td>
+      <td>
+	<input type="text" ng-model="asemb.operator" ng-show="asemb.isEditable()" />
+	{{asemb.isEditable() ? '' : asemb.operator}}
+      </td>
+      <td>
+	<input type="number" ng-model="asemb.pieces" ng-show="asemb.isEditable()" />
+	{{asemb.isEditable() ? '' : asemb.pieces}}
       </td>
       <td>
 	<a ng-click="assembs.save($index)" ng-show="asemb.isEditable()"><i class="glyphicon glyphicon-ok"></i></a>

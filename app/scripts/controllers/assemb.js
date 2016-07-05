@@ -1,6 +1,10 @@
 angular.module('productionLineApp').
-    controller('AssembCtrl', function (ens, fbRef) {
-	this.ensambladoras = ens;
+    controller('AssembCtrl', function (snapshot, fbRef) {
+	var self = this;
+	self.ensambladoras = [];
+	angular.forEach(snapshot.val(),function(data, key){
+	    self.ensambladoras.push(new Box(data, key))
+	});
 
 	this.add = function() {
 	    if (this.ensambladoras == null)

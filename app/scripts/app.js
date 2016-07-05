@@ -19,7 +19,8 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        controllerAs: 'main',
+	resolve: { snapshot: function(Assemb) { return Assemb.fetch(); } }
       })
       .when('/operator', {
         templateUrl: 'views/operator.html',
@@ -30,7 +31,7 @@ angular
         templateUrl: 'views/assemb.html',
         controller: 'AssembCtrl',
         controllerAs: 'assembs',
-	resolve: { ens: function(Assemb) { return Assemb.fetch(); } }
+	resolve: { snapshot: function(Assemb) { return Assemb.fetch(); } }
       })
       .otherwise({
         redirectTo: '/'
