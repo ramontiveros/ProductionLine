@@ -10,8 +10,9 @@
  */
 angular
   .module('productionLineApp', [
-    'ngRoute',
-    'ngTouch'
+      'ngRoute',
+      'ngTouch',
+      'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -20,10 +21,16 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/operator', {
+        templateUrl: 'views/operator.html',
+        controller: 'OperatorCtrl',
+        controllerAs: 'operator'
+      })
+      .when('/assemb', {
+        templateUrl: 'views/assemb.html',
+        controller: 'AssembCtrl',
+        controllerAs: 'assembs',
+	resolve: { ens: function(Assemb) { return Assemb.fetch(); } }
       })
       .otherwise({
         redirectTo: '/'

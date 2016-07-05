@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>X</th>
+      <th>Y</th>
+      <th><a ng-click="assembs.add()"><i class="glyphicon glyphicon-plus-sign"></i></a></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="asemb in assembs.ensambladoras">
+      <td>
+	<input type="text" ng-model="asemb.name" ng-show="asemb.isEditable()" />
+	{{asemb.isEditable() ? '' : asemb.name}}
+      </td>
+      <td>
+	<input type="number" ng-model="asemb.x" ng-show="asemb.isEditable()" />
+	{{asemb.isEditable() ? '' : asemb.x}}
+      </td>
+      <td>
+	<input type="number" ng-model="asemb.y" ng-show="asemb.isEditable()" />
+	{{asemb.isEditable() ? '' : asemb.y}}
+      </td>
+      <td>
+	<a ng-click="assembs.save($index)" ng-show="asemb.isEditable()"><i class="glyphicon glyphicon-ok"></i></a>
+	<a ng-click="assembs.cancel($index)" ng-show="asemb.isEditable()"><i class="glyphicon glyphicon-remove"></i></a>
+	<a ng-click="assembs.update($index)" ng-show="!asemb.isEditable()"><i class="glyphicon glyphicon-pencil"></i></a>
+	<a ng-click="assembs.remove($index)" ng-show="!asemb.isEditable()"><i class="glyphicon glyphicon-trash"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
